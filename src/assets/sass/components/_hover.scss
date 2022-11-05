@@ -1,0 +1,163 @@
+$defaultDuration: .3s;
+$primaryColour: #ececec;
+$secondaryColour: #666;
+$shadowColour: rgba(0, 0, 0, .6);
+
+@mixin hideTapHighlightColor() {
+    //Prevent highlight colour when element is tapped
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+@mixin hardwareAccel() {
+    //Improve performance on mobile/tablet devices
+    transform: translateZ(0);
+}
+
+@mixin improveAntiAlias() {
+    //Improve aliasing on mobile/tablet devices
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+/* Tracking in Expand */
+@keyframes tracking-in-expand {
+    0% {
+        letter-spacing: -0.5em;
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.tracking-in-expand {
+    -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+    animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+/* Shrink */
+.shrink {
+    display: inline-block;
+    transition-duration: $defaultDuration;
+    transition-property: transform;
+
+    @include hideTapHighlightColor();
+    @include hardwareAccel();
+    @include improveAntiAlias();
+
+    &:hover {
+        transform: scale(.95);
+    }
+}
+
+/* Grow */
+.grow {
+    display: inline-block;
+    transition-duration: $defaultDuration;
+    transition-property: transform;
+
+    @include hideTapHighlightColor();
+    @include hardwareAccel();
+    @include improveAntiAlias();
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+// Curl dimensions
+$curlWidth: 50px;
+$curlHeight: 50px;
+
+// Curl colours
+$revealAreaColour: white; // reveal area behind the curl
+$curlLineColour: #aaa; // crease line
+$curlTransitionColour: #ccc; // colour transitioning from crease line to final colour
+$curlLastColour: white; // final colour of the back of the curl
+
+/* Grow Rotate */
+.grow-rotate {
+    display: inline-block;
+    transition-duration: $defaultDuration;
+    transition-property: transform;
+
+    @include hideTapHighlightColor();
+    @include hardwareAccel();
+    @include improveAntiAlias();
+
+    &:hover {
+        transform: scale(1.1) rotate(4deg);
+    }
+}
+
+/* Curl Top Left */
+.curl-top-left {
+    display: inline-block;
+    position: relative;
+    @include hideTapHighlightColor();
+    @include hardwareAccel();
+    @include improveAntiAlias();
+
+    &:before {
+        pointer-events: none;
+        position: absolute;
+        content: '';
+        height: 0;
+        width: 0;
+        top: 0;
+        left: 0;
+        background: $revealAreaColour;
+        /* IE9 */
+        background: linear-gradient(135deg,
+                $revealAreaColour 45%,
+                $curlLineColour 50%,
+                $curlTransitionColour 56%,
+                $curlLastColour 80%);
+        filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#ffffff', endColorstr='#000000');
+        /*For IE7-8-9*/
+
+        z-index: 1000;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
+        transition-duration: $defaultDuration;
+        transition-property: width height;
+    }
+
+    &:hover:before {
+        width: $curlWidth;
+        height: $curlHeight;
+    }
+}
+
+/* Glow */
+.glow {
+	display: inline-block;
+	transition-duration: $defaultDuration;
+	transition-property: box-shadow;
+
+	@include hideTapHighlightColor();
+	@include hardwareAccel();
+	@include improveAntiAlias();
+
+	&:hover {
+		box-shadow: 0 0 12px 4px $shadowColour;
+	}
+}
+
+/* Box Shadow Outset */
+.box-shadow-outset {
+	display: inline-block;
+	transition-duration: $defaultDuration;
+	transition-property: box-shadow;
+
+	@include hideTapHighlightColor();
+	@include hardwareAccel();
+	@include improveAntiAlias();
+
+	&:hover {
+		box-shadow: 4px 4px 2px $shadowColour;
+	}
+}

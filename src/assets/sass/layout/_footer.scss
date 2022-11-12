@@ -1,42 +1,51 @@
-#footer {
-    border-top: 2px solid #C3C3C3;
-    .lp-location, .lp-phone, .lp-email, .lp-arrow-right{
-        color: $Grey;
-    }
+.footer {
+    background-color: #2b3940;
 
-    img {
-        @include min-width-1200 {
-            width: 80%;
+    &__content {
+        padding: 60px 0px;
+
+        svg {
+            width: 250px;
+            filter: brightness(0) invert(1);
         }
 
-    }
-    @include max-width-1200{
-        a:has(img) {
+        &__contact {
             display: grid;
             place-items: center;
-        }
-    }
+            label {
+                display: block;
+                font-size: 20px;
+                font-weight: 700;
+                color: white;
+            }
 
-    li {
-        font-size: 32px;
-    }
-
-    .copyright {
-
-        &::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 80%;
-            bottom: 0;
-            width: 360%;
-            background: $Blue-secondary;
-            z-index: -1;
+            .email-for-contact {
+                font-size: 20px;
+                font-weight: 700;
+                color: #00b074;
+            }
         }
 
-        .container-anpha {
-            background-color: $Blue-secondary;
-            border-radius: 0px 60px 0px 0px;
+        .content__nav {
+            &__list {
+                &__item {
+                    &--header {
+                        margin-bottom: 24px;
+                        color: #00b074;
+                        font-size: 20px;
+                        font-weight: 700;
+                    }
+
+                    .nav-item {
+                        margin-bottom: 1rem;
+
+                        &>a {
+                            padding: 0;
+                            color: white;
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -19,7 +19,8 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
+    background-color: #f2f2f2;;
 }
 
 .cl-blue-secondary {
@@ -52,6 +53,6 @@ body {
     }
 }
 
-button {
+button, input {
     box-shadow: none !important;
 }

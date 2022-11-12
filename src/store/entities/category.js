@@ -191,13 +191,52 @@ export const getCategoriesIntroSlice = createSlice({
     }
 })
 
+// get all categories
+const initStateGetAllCategories = {
+    loadingGetAllCategories: false,
+    categories: []
+}
+
+export const getAllCategoriesAction = createAsyncThunk(
+    "get all categories",
+    async () => {
+        try{
+            const {data} = await axios.get(`${apiUrl}/categories/all`)
+            console.log(data)
+            return data
+        }
+        catch(error){
+            return error.response.data
+        }
+    }
+)
+
+export const getAllCategoriesSlice = createSlice({
+    initialState: initStateGetAllCategories,
+    name: "get all categories",
+    extraReducers: (builder) => {
+        builder.addCase(getAllCategoriesAction.pending, (state) => {
+            state.loadingGetAllCategories= true
+        })
+        builder.addCase(getAllCategoriesAction.fulfilled, (state, data) => {
+            state.loadingGetAllCategories = false
+            
+            state.categories = data.payload.categories
+        })
+        builder.addCase(getAllCategoriesAction.rejected, (state, data) => {
+            state.loadingGetAllCategories =  false
+        })
+    }
+})
+
 // reducers
 const categoryReducer = combineReducers({
     createCategory: createCategorySlice.reducer,
     getCategories: getCategoriesSlice.reducer,
     getCategoriesNoParents: getCategoriesNoParentsSlice.reducer,
     getCategoriesWithChildren: getCategoriesWithChildrenSlice.reducer,
-    getCategoriesIntro: getCategoriesIntroSlice.reducer
+    getCategoriesIntro: getCategoriesIntroSlice.reducer,
+    getAllCategories: getAllCategoriesSlice.reducer
 })
 
 export default categoryReducer

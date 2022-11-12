@@ -15,6 +15,7 @@ export const loginAction = createAsyncThunk(
     async ({email, password}) => {
         try{
             const {data} = await axios.post(`${apiUrl}/login`, {email, password})
+            console.log(data)
             if (data.success){
                 localStorage.setItem('job', data.token.token)
             }

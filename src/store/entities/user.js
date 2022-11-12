@@ -13,9 +13,14 @@ const initStateGetProfile = {
 export const getProfileAction = createAsyncThunk(
     "profile",
     async () => {
-        console.log("OK")
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem('job')}`
+            }
+        }
         
-        const {data} = await axios.get(`${apiUrl}/profile`, {withCredentials: true})
+        const {data} = await axios.get(`${apiUrl}/profile`, config)
+        console.log(data)
         return data
     }
 )

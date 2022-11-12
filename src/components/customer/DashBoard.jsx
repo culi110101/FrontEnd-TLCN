@@ -4,9 +4,36 @@ import ItemsDetailControl from './ItemsDetailControl';
 import CreatePost from './CreatePost';
 import PostProcessingItems from './PostProcessingItems';
 import ManagePostForFreelancer from '../auth/freelancer/ManagePostForFreelancer';
-
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { getMyJobsAction, getMyJobsProcessingAction } from '../../store/entities/job';
+import { handleDate } from '../../common/lib';
+import { convert2arr } from '../../common/lib';
+import { Pagination } from 'react-bootstrap';
 
 const DashBoard = () => {
+    const dispatch = useDispatch()
+
+    const [info, setInfo] = useState({
+        pageShowOpen: 1
+    })
+
+    const { resultsOpen, categoriesOpen, offersOpen, totalResultsOpen, totalPagesOpen } = useSelector(state => state.job.getMyJobs)
+    const { resultsProcessing, categoriesProcessing, totalResultsProcessing } = useSelector(state => state.job.getMyJobs)
+
+    const changePageOpen = (page) => {
+        setInfo({
+            ...info,
+            pageShowOpen: page
+        })
+        dispatch(getMyJobsAction({ limit: 3, page }))
+    }
+
+    useEffect(() => {
+        dispatch(getMyJobsAction({ limit: 3, page: 1 }))
+        dispatch(getMyJobsProcessingAction({ limit: 3, page: 1 }))
+    }, [])
+
     return (
         <div className='dashboard-manage'>
             <div className='d-flex'>
@@ -15,8 +42,8 @@ const DashBoard = () => {
                 </div>
                 <div className='dashboard-manage__content'>
                     <div className='m-3'>
-                        <h2 className='mb-3'>
-                            Posted Jobs (<span>4</span>)
+                        <h2>
+                            Posted Jobs (<span>{totalResultsOpen}</span>)
                         </h2>
                         <div className='dashboard-manage__content__postlist'>
                             <div className='dashboard-manage__content__postlist__table'>
@@ -31,59 +58,38 @@ const DashBoard = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope='row'>
-                                                <ItemsDetailControl></ItemsDetailControl>
-                                            </th>
-                                            <td>Design</td>
-                                            <td>12 July, 2020</td>
-                                            <td>47</td>
-                                            <td>
-                                                <div>
-                                                    <Button variant="primary" className="btn-delete-post">
-                                                        Delete
-                                                    </Button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope='row'>
-                                                <ItemsDetailControl></ItemsDetailControl>
-                                            </th>
-                                            <td>Design</td>
-                                            <td>12 July, 2020</td>
-                                            <td>47</td>
-                                            <td>
-                                                <div>
-                                                    <Button variant="primary" className="btn-delete-post">
-                                                        Delete
-                                                    </Button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope='row'>
-                                                <ItemsDetailControl></ItemsDetailControl>
-                                            </th>
-                                            <td>Design</td>
-                                            <td>12 July, 2020</td>
-                                            <td>47</td>
-                                            <td>
-                                                <div>
-                                                    <Button variant="primary" className="btn-delete-post">
-                                                        Delete
-                                                    </Button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        {resultsOpen && resultsOpen.map((job, index) => (
+                                            <tr key={index}>
+                                                <th scope='row'>
+                                                    <ItemsDetailControl job={job}></ItemsDetailControl>
+                                                </th>
+                                                <td>{categoriesOpen[index].name}</td>
+                                                <td>{handleDate(job.createdAt)}</td>
+                                                <td>{offersOpen[index]}</td>
+                                                <td>
+                                                    <div>
+                                                        <Button variant="primary" className="btn-delete-post">
+                                                            Delete
+                                                        </Button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </table>
+                                {totalPagesOpen && (
+                                    <Pagination className='mt-2'>
+                                        {convert2arr(totalPagesOpen).map((item) => (
+                                            <Pagination.Item onClick={() => changePageOpen(item + 1)} active={item + 1 === info.pageShowOpen} key={item}>{item + 1}</Pagination.Item>
+                                        ))}
+                                    </Pagination>
+                                )}
                             </div>
                         </div>
                     </div>
                     <div className='mx-3 my-5 py-5'>
-                        <h2 className='mb-3'>
-                            Posted Jobs Processing (<span>4</span>)
+                        <h2>
+                            Posted Jobs Processing (<span>{totalResultsProcessing}</span>)
                         </h2>
                         <div className='dashboard-manage__content__postlistprocessing'>
                             <div className='dashboard-manage__content__postlistprocessing__table'>
@@ -98,51 +104,23 @@ const DashBoard = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope='row'>
-                                                <PostProcessingItems></PostProcessingItems>
-                                            </th>
-                                            <td>Design</td>
-                                            <td>12 July, 2020</td>
-                                            <td>12 July, 2020</td>
-                                            <td>
-                                                <div>
-                                                    <Button variant="primary" className="btn-delete-post">
-                                                        Delete
-                                                    </Button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope='row'>
-                                                <PostProcessingItems></PostProcessingItems>
-                                            </th>
-                                            <td>Design</td>
-                                            <td>12 July, 2020</td>
-                                            <td>12 July, 2020</td>
-                                            <td>
-                                                <div>
-                                                    <Button variant="primary" className="btn-delete-post">
-                                                        Delete
-                                                    </Button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope='row'>
-                                                <PostProcessingItems></PostProcessingItems>
-                                            </th>
-                                            <td>Design</td>
-                                            <td>12 July, 2020</td>
-                                            <td>12 July, 2020</td>
-                                            <td>
-                                                <div>
-                                                    <Button variant="primary" className="btn-delete-post">
-                                                        Delete
-                                                    </Button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        {resultsProcessing && resultsProcessing.map((item, index) => (
+                                            <tr key={index}>
+                                                <th scope='row'>
+                                                    <PostProcessingItems></PostProcessingItems>
+                                                </th>
+                                                <td>{item.name}</td>
+                                                <td>12 July, 2020</td>
+                                                <td>12 July, 2020</td>
+                                                <td>
+                                                    <div>
+                                                        <Button variant="primary" className="btn-delete-post">
+                                                            Delete
+                                                        </Button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </table>
                             </div>
@@ -150,7 +128,7 @@ const DashBoard = () => {
                     </div>
                     <ManagePostForFreelancer></ManagePostForFreelancer>
                 </div>
-                
+
 
             </div>
         </div>

@@ -15,7 +15,6 @@ const JobDetails = () => {
 
     useEffect(() => {
         const id = searchParams.get('id')
-        console.log(id)
         if (id) {
             dispatch(getJobByIdAction(id))
         }

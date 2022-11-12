@@ -1,9 +1,43 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import {useDispatch, useSelector } from 'react-redux'
+import { useEffect } from "react";
+import { getAllCategoriesAction } from "../../store/entities/category";
+import { createJobAction } from "../../store/entities/job";
+
 
 const CreatePost = () => {
     const [show, setShow] = useState(false);
+
+    const dispatch = useDispatch()
+    const {categories } = useSelector(state => state.category.getAllCategories)
+
+    useEffect(() => {
+        dispatch(getAllCategoriesAction())
+    }, [dispatch])
+
+    const [jobData, setData] = useState({
+        name: '',
+        description: '',
+        startDate: '',
+        endDate: '',
+        minPrice: 0,
+        maxPrice: 0,
+        category: ""
+    })
+
+    const getInfo = (event) => {
+        setData({
+            ...jobData,
+            [event.target.name]: event.target.value
+        })
+    }
+
+    const submitCreateJob = () => {
+        console.log(jobData)
+        dispatch(createJobAction(jobData))
+    }
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -25,17 +59,17 @@ const CreatePost = () => {
 
                             <div className="mb-3">
                                 <label className="form-label">Name Of Job</label>
-                                <input className="form-input" type="text" placeholder="Name Of Job" />
+                                <input name='name' onChange={getInfo} className="form-input" type="text" placeholder="Name Of Job" />
                             </div>
                             <div className="mb-3 w-100 block-date">
                                 <div className="d-flex">
                                     <div className="col-6 mb-3 pe-3">
                                         <label className="form-label">Start Day</label>
-                                        <input className="form-input" type="date" placeholder="Start Day" />
+                                        <input name='startDate' onChange={getInfo} className="form-input" type="date" placeholder="Start Day" />
                                     </div>
                                     <div className="col-6 mb-3">
                                         <label className="form-label">End Day</label>
-                                        <input className="form-input" type="date" placeholder="End Day" />
+                                        <input name='endDate' onChange={getInfo} className="form-input" type="date" placeholder="End Day" />
                                     </div>
                                 </div>
                             </div>
@@ -43,30 +77,30 @@ const CreatePost = () => {
                                 <div className="d-flex">
                                     <div className="col-6 mb-3 pe-3">
                                         <label className="form-label">Limited Price</label>
-                                        <input className="form-input" type="number" placeholder="Limited Price" />
+                                        <input name='minPrice' onChange={getInfo} className="form-input" type="number" placeholder="Limited Price" />
                                     </div>
                                     <div className="col-6 mb-3">
                                         <label className="form-label">Max Price</label>
-                                        <input className="form-input" type="number" placeholder="Max Price" />
+                                        <input name='maxPrice' onChange={getInfo} className="form-input" type="number" placeholder="Max Price" />
                                     </div>
                                 </div>
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Type Of Job </label>
-                                <select className ="dropdown w-100" name="service-list" defaultValue={'0'}>
+                                <select  className ="dropdown w-100" name="category" onChange={getInfo} defaultValue={'0'}>
                                     <option className ="w-100" value="0" selected>Type Of Job</option>
-                                    <option className ="w-100" value="1">One</option>
-                                    <option className ="w-100" value="2">Two</option>
-                                    <option className ="w-100" value="3">Three</option>
+                                    {categories && categories.map((category) => (
+                                        <option className ="w-100" value={category.id} selected>{category.name}</option>
+                                    ))}
                                 </select>
                             </div>
                             <div>
                                 <label htmlFor="decription">Decription</label>
-                                <textarea className='' name="" id="decription" rows="5"></textarea>
+                                <textarea className='' name="description" onChange={getInfo} id="decription" rows="5"></textarea>
                             </div>
                             <div className="d-flex mt-3">
                                 <div className="col-6 pe-3">
-                                    <Button variant="primary" type="submit" className="btn-go-to-home">
+                                    <Button onClick={submitCreateJob} variant="primary" type="submit" className="btn-go-to-home">
                                         Create
                                     </Button>
                                 </div>

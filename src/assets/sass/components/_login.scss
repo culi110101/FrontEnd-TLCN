@@ -1,19 +1,14 @@
 .modal-body {
     padding: 0;
-    width: 800px;
-    height: 650px;
 }
 
 .modal-dialog {
     display: grid;
     place-items: center;
-    max-width: fit-content;
     height: 100%;
 }
 
 .modal-content {
-    width: fit-content;
-    height: fit-content;
     border-radius: 16px;
 }
 

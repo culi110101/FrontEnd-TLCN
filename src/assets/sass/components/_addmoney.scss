@@ -1,7 +1,8 @@
-.add-money{
+.add-money {
     background-color: white;
     padding-top: 120px;
     padding-bottom: 120px;
+
     &__items {
         margin-top: 40px;
 
@@ -9,6 +10,7 @@
             margin-bottom: 40px;
             z-index: 1;
             padding: 8px;
+
             @include max-width-992 {
                 animation: none;
             }
@@ -17,6 +19,7 @@
                 border: 2px solid #00b074;
                 border-radius: 20px;
                 background-color: #ffff;
+
                 @include max-width-992 {
                     max-width: 452px;
                 }
@@ -152,6 +155,7 @@
         &__card:first-child,
         &__card:nth-child(3) {
             margin-top: 40px;
+
             @include max-width-992 {
                 margin-top: 0;
             }
@@ -162,5 +166,15 @@
                 margin-bottom: 0;
             }
         }
+    }
+
+    &--heading {
+        font-size: 3rem;
+        line-height: 1.25;
+        letter-spacing: -.48px;
+        color: #2b3940;
+        margin-bottom: 1.25rem;
+        font-weight: 700;
+
     }
 }

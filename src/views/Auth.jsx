@@ -18,7 +18,6 @@ const Auth = ({authRoute}) => {
             <Category></Category>
             <FeaturedJobs></FeaturedJobs>
             <AddMoney></AddMoney>
-            {/* {authRoute === "login" && <Login />} */}
         </div>
     )
 

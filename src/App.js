@@ -4,6 +4,8 @@ import Auth from './views/Auth';
 import SearchList from './views/SearchList';
 import JobItemsLayer from './views/JobItemsLayer';
 import ProfileUser from './views/ProfileUser';
+import ManageForCustomer from './views/ManageForCustomer';
+import "./assets/sass/main.scss";
 
 
 function App() {
@@ -14,6 +16,7 @@ function App() {
         <Route path='/search' element={<SearchList></SearchList>}/>
         <Route path='/items' element={<JobItemsLayer></JobItemsLayer>}/>
         <Route path='/profile' element={<ProfileUser></ProfileUser>}/>
+        <Route path='/manageforcustomer' element={<ManageForCustomer></ManageForCustomer>}/>
       </Routes>
     </BrowserRouter>
   );

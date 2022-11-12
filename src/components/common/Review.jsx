@@ -10,9 +10,8 @@ const Review = () => {
                         <img className='review__content__heading--avatar' src={Avatar}></img>
                         <div >
                             <h3 className='review__content__heading--name'>David Henricks</h3>
-                            <div class="review__content__heading__star-rating--start">
-                                <input type="ratio" id="start1" name="rating" value="1"></input>
-                                <label for="start1" title="1 start">☆</label>
+                            <div className="review__content__heading__star-rating--start">
+                                <label htmlFor="start1" title="1 start">☆</label>
                             </div>
                         </div>
                     </div>

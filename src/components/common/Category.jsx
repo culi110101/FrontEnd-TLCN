@@ -1,4 +1,6 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDesktop } from '@fortawesome/free-solid-svg-icons'
 
 const Category = () => {
     return (
@@ -13,7 +15,7 @@ const Category = () => {
                         <a href='#'>
                             <div>
                                 <div className='category__list__items--icon'>
-                                    <i>icon</i>
+                                <FontAwesomeIcon icon={faDesktop} />
                                 </div>
                                 <p className='category__list__items--header'>Development</p>
                                 <p className='category__list__items--decription'> <span className='category__list__items--sum-job'>415</span> Vacancy </p>
@@ -24,7 +26,7 @@ const Category = () => {
                         <a href='#'>
                             <div>
                                 <div className='category__list__items--icon'>
-                                    <i>icon</i>
+                                <FontAwesomeIcon icon={faDesktop} />
                                 </div>
                                 <p className='category__list__items--header'>Development</p>
                                 <p className='category__list__items--decription'> <span className='category__list__items--sum-job'>415</span> Vacancy </p>
@@ -35,7 +37,7 @@ const Category = () => {
                         <a href='#'>
                             <div>
                                 <div className='category__list__items--icon'>
-                                    <i>icon</i>
+                                    <FontAwesomeIcon icon={faDesktop} />
                                 </div>
                                 <p className='category__list__items--header'>Development</p>
                                 <p className='category__list__items--decription'> <span className='category__list__items--sum-job'>415</span> Vacancy </p>
@@ -46,7 +48,7 @@ const Category = () => {
                         <a href='#'>
                             <div>
                                 <div className='category__list__items--icon'>
-                                    <i>icon</i>
+                                    <FontAwesomeIcon icon={faDesktop} />
                                 </div>
                                 <p className='category__list__items--header'>Development</p>
                                 <p className='category__list__items--decription'> <span className='category__list__items--sum-job'>415</span> Vacancy </p>

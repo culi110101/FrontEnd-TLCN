@@ -1,14 +1,16 @@
 .freelancerapply__content {
     width: 100%;
+    margin-top: 3rem;
 
-    h2 {
+    h4 {
         font-weight: 700;
         color: #2b3940;
+        margin-bottom: 16px;
+        font-size: 24px;
     }
 
     &__postlist {
         width: 100%;
-        padding: 20px 30px 40px 30px;
         background-color: white;
 
         &__table {

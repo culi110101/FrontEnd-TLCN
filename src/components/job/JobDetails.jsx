@@ -5,6 +5,7 @@ import { getJobByIdAction } from '../../store/entities/job';
 import { useSearchParams } from 'react-router-dom'
 import { useEffect } from 'react';
 import { handleDate } from '../../common/lib';
+import Offer from '../common/Offer';
 const JobDetails = () => {
     const dispatch = useDispatch()
 
@@ -53,7 +54,7 @@ const JobDetails = () => {
                                         </div>
                                     </div>
                                     <div className='d-flex justify-content-between'>
-                                        <button className='btn-apply'>Apply to this job</button>
+                                        <Offer></Offer>
                                         <div className='d-flex'>
                                             <div className='d-flex jobdetail__price'>
                                                 {/* icon đô la */}
@@ -94,10 +95,6 @@ const JobDetails = () => {
                                                 <li>Contribute new controls or design improvements to our</li>
                                                 <li>Contribute new controls or design improvements to our</li>
                                             </ul>
-                                        </div>
-                                        <div className='d-flex justify-content-center'>
-
-                                            <button className='btn-apply'>Apply to this job</button>
                                         </div>
                                     </div>
                                 </div>

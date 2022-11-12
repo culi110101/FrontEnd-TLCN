@@ -5,7 +5,7 @@ import UserDetail from './UserDetail';
 const FreelancerApply = () => {
     return (
         <div className='freelancerapply__content'>
-            <div className='m-3'>
+            <div className=''>
                 <h4>
                     Freelancer Applied (<span>4</span>)
                 </h4>

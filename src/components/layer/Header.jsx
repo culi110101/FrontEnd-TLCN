@@ -17,13 +17,13 @@ const Header = () => {
                                 <div className="nav-handle__list d-none d-lg-flex" id="navbarSupportedContent">
                                     <ul className="ms-auto mb-2 mb-lg-0 ps-0 d-flex nav-handle__list__items">
                                         <li className="nav-handle__list__items--name">
-                                            <a className="p-0" aria-current="page" href="home">TRANG CHỦ</a>
+                                            <a className="p-0" aria-current="page" href="home">Home</a>
                                         </li>
                                         <li className="nav-handle__list__items--name">
-                                            <a className="p-0" href="article.category ">BÀI VIẾT</a>
+                                            <a className="p-0" href="article.category ">Jobs</a>
                                         </li>
                                         <li className="nav-handle__list__items--name">
-                                            <a className="p-0" href="article.detail">GIỚI THIỆU</a>
+                                            <a className="p-0" href="article.detail">About Us</a>
                                         </li>
                                         <li className="nav-handle__list__items--name">
                                             <div className='m-2'>

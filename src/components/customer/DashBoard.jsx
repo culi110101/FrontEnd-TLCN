@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import ItemsDetailControl from './ItemsDetailControl';
 import CreatePost from './CreatePost';
 import PostProcessingItems from './PostProcessingItems';
+import ManagePostForFreelancer from '../auth/freelancer/ManagePostForFreelancer';
 
 
 const DashBoard = () => {
@@ -14,7 +15,7 @@ const DashBoard = () => {
                 </div>
                 <div className='dashboard-manage__content'>
                     <div className='m-3'>
-                        <h2>
+                        <h2 className='mb-3'>
                             Posted Jobs (<span>4</span>)
                         </h2>
                         <div className='dashboard-manage__content__postlist'>
@@ -81,7 +82,7 @@ const DashBoard = () => {
                         </div>
                     </div>
                     <div className='mx-3 my-5 py-5'>
-                        <h2>
+                        <h2 className='mb-3'>
                             Posted Jobs Processing (<span>4</span>)
                         </h2>
                         <div className='dashboard-manage__content__postlistprocessing'>
@@ -147,6 +148,7 @@ const DashBoard = () => {
                             </div>
                         </div>
                     </div>
+                    <ManagePostForFreelancer></ManagePostForFreelancer>
                 </div>
                 
 

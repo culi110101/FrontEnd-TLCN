@@ -48,7 +48,7 @@ const AddMoney = () => {
                                     <div class="d-flex justify-content-center add-money__items__card__content__btn">
                                         <a href="#section-contact" class="d-flex align-items-center pulse">
                                             <p class="me-lg-1 mb-0">
-                                                Đăng ký ngay
+                                                Pay Now
                                             </p>
                                             <i class="d-flex align-items-center lp-circel-arrow-up"></i>
                                         </a>

@@ -6,6 +6,7 @@ import FreelancerApply from "./FreelancerApply";
 import TaskList from "./TaskList";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
+import DecriptionJob from "../common/DecriptionJob";
 
 const ItemsDetailControl = () => {
     const [show, setShow] = useState(false);
@@ -81,33 +82,7 @@ const ItemsDetailControl = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className='itemsdetailcontrol__content__body'>
-                                            <div className=''>
-                                                <div className='itemsdetailcontrol__content__body__decription mb-5'>
-                                                    <h4 className='itemsdetailcontrol__content__body__decription--heading mb-4'>Job Description</h4>
-                                                    <p className='itemsdetailcontrol__content__body__decription--detail'>
-                                                        We’re looking for a passionate individual to design beautiful and functional products for our customers at Gubagoo. We move very fast and you will be expected to contribute to a cross-functional product development squad, that includes product managers and developers, to deliver the UX and UI for the team to bring to life.We are serious about remote work. You can work for from anywhere.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div className=''>
-                                                <div className='itemsdetailcontrol__content__body__tasklist mb-5'>
-                                                    <h4 className='itemsdetailcontrol__content__body__tasklist--heading mb-4'>Common Task Of Job</h4>
-                                                    <ul className="itemsdetailcontrol__content__body__tasklist__items">
-                                                        <li className="itemsdetailcontrol__content__body__tasklist__items--detail"> tên task 1àhjsahf sahfksa ldhfjkf skjsss sssss sssss sssss ssss ssss ssss sss</li>
-                                                        <li className="itemsdetailcontrol__content__body__tasklist__items--detail"> tên task2</li>
-                                                        <li className="itemsdetailcontrol__content__body__tasklist__items--detail"> tên task3</li>
-                                                        <li className="itemsdetailcontrol__content__body__tasklist__items--detail"> tên task4</li>
-                                                        <li className="itemsdetailcontrol__content__body__tasklist__items--detail"> tên task5</li>
-                                                        <li className="itemsdetailcontrol__content__body__tasklist__items--detail"> tên task6</li>
-                                                        <li className="itemsdetailcontrol__content__body__tasklist__items--detail"> tên task7</li>
-                                                        <li className="itemsdetailcontrol__content__body__tasklist__items--detail"> tên task8</li>
-                                                        <li className="itemsdetailcontrol__content__body__tasklist__items--detail"> tên task9</li>
-                                                        <li className="itemsdetailcontrol__content__body__tasklist__items--detail"> tên task10</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <DecriptionJob></DecriptionJob>
                                         <TaskList></TaskList>
                                         <FreelancerApply></FreelancerApply>
                                     </div>

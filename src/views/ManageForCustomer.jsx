@@ -3,6 +3,7 @@ import Header from '../components/layer/Header'
 import Footer from '../components/layer/Footer'
 import DashBoard from '../components/customer/DashBoard'
 
+
 const ManageForCustomer = () => {
     let body = (
         <div className='manageforcustomer'>

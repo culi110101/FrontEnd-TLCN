@@ -7,10 +7,6 @@ import Review from "../common/Review";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
-import Contact from "../common/Contact";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getProfileAction } from "../../store/entities/user";
 const UserDetail = () => {
     const [show, setShow] = useState(false);
 

@@ -121,15 +121,28 @@ export const deleteJobByIdSlice = createSlice({
 const initStateGetMyJobs = {
     loadingGetMyJobs: false,
     successGetMyJobs: false,
-    result: []
+    resultsOpen: [],
+    categoriesOpen: [],
+    offersOpen: [],
+    totalResultsOpen: 0,
+    totalPagesOpen: 0
 }
 
 export const getMyJobsAction = createAsyncThunk(
     "get my jobs - employer",
     async (queryData) => {
-        const {data} = await axios.get(`${apiUrl}/my/jobs?name=${queryData.name}&status=${queryData.status}&sortBy=${queryData.sortBy}&limit=${queryData.limit}&page=${queryData.page}&exclude=${queryData.exclude}`)
-
-        return data
+        try{
+            const config = {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('job')}`
+                }
+            }
+            const {data} = await axios.get(`${apiUrl}/my/jobs?status=Open&limit=${queryData.limit}&page=${queryData.page}`, config)
+            return data
+        }
+        catch(error){
+            console.log(error)
+        }
     }
 )
 
@@ -143,7 +156,55 @@ export const getMyJobsSlice = createSlice({
         builder.addCase(getMyJobsAction.fulfilled, (state, data) => {
             state.loadingGetMyJobs = false
             state.successGetMyJobs = data.payload.success
-            state.result = data.payload.result
+            state.resultsOpen = data.payload.results
+            state.categoriesOpen = data.payload.categories
+            state.offersOpen = data.payload.offers
+            state.totalResultsOpen = data.payload.totalResults
+            state.totalPagesOpen = data.payload.totalPages
+        })
+        builder.addCase(getMyJobsAction.rejected, (state, data) => {
+            state.loadingGetMyJobs = false
+            state.successGetMyJobs = false
+        })
+    }
+})
+
+// get my jobs - employer
+const initStateGetMyJobsProcessing = {
+    loadingGetMyJobsProcessing: false,
+    successGetMyJobsProcessing: false,
+    resultsProcessing: [],
+    categoriesProcessing: [],
+    totalResultsProcessing: 0
+}
+
+export const getMyJobsProcessingAction = createAsyncThunk(
+    "get my processing jobs - employer",
+    async (queryData) => {
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem('job')}`
+            }
+        }
+        const {data} = await axios.get(`${apiUrl}/my/jobs?status=Processing&limit=${queryData.limit}&page=${queryData.page}`, config)
+        console.log(data)
+        return data
+    }
+)
+
+export const getMyJobsProcessingSlice = createSlice({
+    initialState: initStateGetMyJobsProcessing,
+    name: "get my processing jobs - employer",
+    extraReducers: (builder) => {
+        builder.addCase(getMyJobsAction.pending, (state)=>{
+            state.loadingGetMyJobs = true
+        })
+        builder.addCase(getMyJobsAction.fulfilled, (state, data) => {
+            state.loadingGetMyJobs = false
+            state.successGetMyJobs = data.payload.success
+            state.resultsProcessing = data.payload.results
+            state.categoriesProcessing = data.payload.categories
+            state.totalResultsProcessing = data.payload.totalResults
         })
         builder.addCase(getMyJobsAction.rejected, (state, data) => {
             state.loadingGetMyJobs = false
@@ -198,8 +259,13 @@ const initStateCreateJob = {
 export const createJobAction = createAsyncThunk(
     "create job",
     async (jobData) => {
-        const {data} = await axios.post(`${apiUrl}/jobs/create`, jobData)
-
+        const config = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("job")}`
+            }
+        }
+        const {data} = await axios.post(`${apiUrl}/jobs/create`, jobData, config)
+        console.log(data)
         return data
     }
 )
@@ -562,7 +628,8 @@ const jobReducer = combineReducers({
     cannelOffer: cannelOfferSlice.reducer,
     reportUser: reportUserSlice.reducer,
     getIntro: getIntroSlice.reducer,
-    getNewestJobs: getNewestJobsSlice.reducer
+    getNewestJobs: getNewestJobsSlice.reducer,
+    getMyJobsProcessing: getMyJobsProcessingSlice.reducer
 })
 
 export default jobReducer

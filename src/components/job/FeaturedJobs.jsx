@@ -8,11 +8,7 @@ const FeaturedJobs = () => {
 
   const dispatch = useDispatch()
 
-  /* const {newestJobs, newestJobsCategories} = useSelector(state => state.job.getNewestJobs)
-
-  useEffect(() => {
-    dispatch(getNewestJobsAction({num: 3,status: "Open"}))
-  }, []) */
+  
   
   const {jobs, categories} = useSelector(state => state.job.getNewestJobs)
   

@@ -1,15 +1,25 @@
 import React from 'react'
 import Avatar from '../../assets/img/avatar.png';
 import { handleDate } from '../../common/lib';
-
+import { useNavigate } from 'react-router-dom';
+import {Pagination} from 'react-bootstrap'
 
 const JobItems = ({ job, category }) => {
+
+    const navigate = useNavigate()
+
+    const goJobItemPage = (id) => {
+        navigate({
+            pathname: '/items',
+            search: `id=${id}`
+        })
+    }
 
 
     return (
         <div>
             {(job && category) && (
-                <div className='jobitems pulse'>
+                <div onClick={() => goJobItemPage(job.id)} className='jobitems pulse'>
                     <div className='row'>
                         <div className='col-6'>
                             <div className='d-flex'>

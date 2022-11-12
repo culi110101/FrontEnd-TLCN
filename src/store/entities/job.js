@@ -1,0 +1,489 @@
+import { createSlice, combineReducers, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios'
+import { apiUrl } from "../../common/consts";
+
+
+// query jobs
+const initStateQueryJobs = {
+    loadingQueryJobs: false,
+    successQueryJobs: false,
+    result: []
+}
+
+export const queryJobsAction = createAsyncThunk(
+    "query jobs",
+    async (dataQuery) => {
+        const {data} = await axios.get(`${apiUrl}/jobs?name=${dataQuery.name}&status=${dataQuery.status}&sortBy=${dataQuery.sortBy}&limit=${dataQuery.limit}&page=${dataQuery.page}&exclude=${dataQuery.exclude}`)
+
+        return data
+    }
+)
+
+export const queryJobsSlice = createSlice({
+    initialState: initStateQueryJobs,
+    name: "query jobs",
+    extraReducers: (builder) => {
+        builder.addCase(queryJobsAction.pending, (state)=>{
+            state.loadingQueryJobs = true
+        })
+        builder.addCase(queryJobsAction.fulfilled, (state, data) => {
+            state.loadingQueryJobs = false
+            state.successQueryJobs = data.payload.success
+            state.result = data.payload.result
+        })
+        builder.addCase(queryJobsAction.rejected, (state, data) => {
+            state.loadingQueryJobs = false
+            state.successQueryJobs = false
+        })
+    }
+})
+
+
+// get job by id
+const initStateGetJobById = {
+    loadingGetJobById: false,
+    successGetJobById: false,
+    job: {}
+}
+
+export const getJobByIdAction = createAsyncThunk(
+    "get job by id",
+    async (id) => {
+        const {data} = await axios.get(`${apiUrl}/jobs/${id}`)
+
+        return data
+    }
+)
+
+export const getJobByIdSlice = createSlice({
+    initialState: initStateGetJobById,
+    name: "get job by id",
+    extraReducers: (builder) => {
+        builder.addCase(getJobByIdAction.pending, (state)=>{
+            state.loadingGetJobById = true
+        })
+        builder.addCase(getJobByIdAction.fulfilled, (state, data) => {
+            state.loadingGetJobById = false
+            state.successGetJobById = data.payload.success
+            state.job = data.payload.job
+        })
+        builder.addCase(getJobByIdAction.rejected, (state, data) => {
+            state.loadingGetJobById = false
+            state.successGetJobById = false
+        })
+    }
+})
+
+// delete job by id
+const initStateDeleteJobById = {
+    loadingDeleteJobById: false,
+    successDeleteJobById: false,
+    message: ''
+}
+
+export const deleteJobByIdAction = createAsyncThunk(
+    "delete job by id",
+    async (id) => {
+        const {data} = await axios.delete(`${apiUrl}/jobs/${id}`)
+
+        return data
+    }
+)
+
+export const deleteJobByIdSlice = createSlice({
+    initialState: initStateDeleteJobById,
+    name: "delete job by id",
+    extraReducers: (builder) => {
+        builder.addCase(deleteJobByIdAction.pending, (state)=>{
+            state.loadingDeleteJobById = true
+        })
+        builder.addCase(deleteJobByIdAction.fulfilled, (state, data) => {
+            state.loadingDeleteJobById = false
+            state.successDeleteJobById = data.payload.success
+            state.message = data.payload.message
+        })
+        builder.addCase(deleteJobByIdAction.rejected, (state, data) => {
+            state.loadingDeleteJobById = false
+            state.successDeleteJobById = false
+        })
+    }
+})
+
+// get my jobs - employer
+const initStateGetMyJobs = {
+    loadingGetMyJobs: false,
+    successGetMyJobs: false,
+    result: []
+}
+
+export const getMyJobsAction = createAsyncThunk(
+    "get my jobs - employer",
+    async (queryData) => {
+        const {data} = await axios.get(`${apiUrl}/my/jobs?name=${queryData.name}&status=${queryData.status}&sortBy=${queryData.sortBy}&limit=${queryData.limit}&page=${queryData.page}&exclude=${queryData.exclude}`)
+
+        return data
+    }
+)
+
+export const getMyJobsSlice = createSlice({
+    initialState: initStateGetMyJobs,
+    name: "get my jobs - employer",
+    extraReducers: (builder) => {
+        builder.addCase(getMyJobsAction.pending, (state)=>{
+            state.loadingGetMyJobs = true
+        })
+        builder.addCase(getMyJobsAction.fulfilled, (state, data) => {
+            state.loadingGetMyJobs = false
+            state.successGetMyJobs = data.payload.success
+            state.result = data.payload.result
+        })
+        builder.addCase(getMyJobsAction.rejected, (state, data) => {
+            state.loadingGetMyJobs = false
+            state.successGetMyJobs = false
+        })
+    }
+})
+
+
+// get my jobs - freelancer
+const initStateGetMyJobsByFreelancer = {
+    loadingGetMyJobsByFreelancer: false,
+    successGetMyJobsByFreelancer: false,
+    result: []
+}
+
+export const getMyJobsByFreelancerAction = createAsyncThunk(
+    "get my jobs - employer",
+    async (queryData) => {
+        const {data} = await axios.get(`${apiUrl}/my/jobs?name=${queryData.name}&status=${queryData.status}&sortBy=${queryData.sortBy}&limit=${queryData.limit}&page=${queryData.page}&exclude=${queryData.exclude}`)
+
+        return data
+    }
+)
+
+export const getMyJobsByFreelancerSlice = createSlice({
+    initialState: initStateGetMyJobsByFreelancer,
+    name: "get my jobs - employer",
+    extraReducers: (builder) => {
+        builder.addCase(getMyJobsByFreelancerAction.pending, (state)=>{
+            state.loadingGetMyJobsByFreelancer = true
+        })
+        builder.addCase(getMyJobsByFreelancerAction.fulfilled, (state, data) => {
+            state.loadingGetMyJobsByFreelancer = false
+            state.successGetMyJobsByFreelancer = data.payload.success
+            state.result = data.payload.result
+        })
+        builder.addCase(getMyJobsByFreelancerAction.rejected, (state, data) => {
+            state.loadingGetMyJobsByFreelancer = false
+            state.successGetMyJobsByFreelancer = false
+        })
+    }
+})
+
+// create job
+const initStateCreateJob = {
+    loadingCreateJob: false,
+    successCreateJob: false,
+    job: {}
+}
+
+export const createJobAction = createAsyncThunk(
+    "create job",
+    async (jobData) => {
+        const {data} = await axios.post(`${apiUrl}/jobs/create`, jobData)
+
+        return data
+    }
+)
+
+export const createJobSlice = createSlice({
+    initialState: initStateCreateJob,
+    name: "create job",
+    extraReducers: (builder) => {
+        builder.addCase(createJobAction.pending, (state)=>{
+            state.loadingCreateJob = true
+        })
+        builder.addCase(createJobAction.fulfilled, (state, data) => {
+            state.loadingCreateJob = false
+            state.successCreateJob = data.payload.success
+            state.job = data.payload.job
+        })
+        builder.addCase(createJobAction.rejected, (state, data) => {
+            state.loadingCreateJob = false
+            state.successCreateJob = false
+        })
+    }
+})
+
+// offer job
+const initStateOfferJob = {
+    loadingOfferJob: false,
+    successOfferJob: false,
+    offer: {}
+}
+
+export const offerJobAction = createAsyncThunk(
+    "offer job",
+    async (offerData, id) => {
+        const {data} = await axios.post(`${apiUrl}/jobs/${id}/offer`, offerData)
+
+        return data
+    }
+)
+
+export const offerJobSlice = createSlice({
+    initialState: initStateOfferJob,
+    name: "offer job",
+    extraReducers: (builder) => {
+        builder.addCase(offerJobAction.pending, (state)=>{
+            state.loadingOfferJob = true
+        })
+        builder.addCase(offerJobAction.fulfilled, (state, data) => {
+            state.loadingOfferJob = false
+            state.successOfferJob = data.payload.success
+            state.offer = data.payload.offer
+        })
+        builder.addCase(offerJobAction.rejected, (state, data) => {
+            state.loadingOfferJob = false
+            state.successOfferJob = false
+        })
+    }
+})
+
+
+// get offers by job
+const initStateGetOffersByJob = {
+    loadingGetOffersByJob: false,
+    successGetOffersByJob: false,
+    offers: [],
+    count: 0
+}
+
+export const getOffersByJobAction = createAsyncThunk(
+    "offer job",
+    async (offerData, id) => {
+        const {data} = await axios.post(`${apiUrl}/jobs/${id}/offers`, offerData)
+
+        return data
+    }
+)
+
+export const getOffersByJobSlice = createSlice({
+    initialState: initStateGetOffersByJob,
+    name: "offer job",
+    extraReducers: (builder) => {
+        builder.addCase(getOffersByJobAction.pending, (state)=>{
+            state.loadingGetOffersByJob = true
+        })
+        builder.addCase(getOffersByJobAction.fulfilled, (state, data) => {
+            state.loadingGetOffersByJob = false
+            state.successGetOffersByJob = data.payload.success
+            state.offers = data.payload.offers
+            count = data.payload.count
+        })
+        builder.addCase(getOffersByJobAction.rejected, (state, data) => {
+            state.loadingGetOffersByJob = false
+            state.successGetOffersByJob = false
+        })
+    }
+})
+
+// get offers by freelancer
+const initStateGetOffersByFreelancer = {
+    loadingGetOffersByFreelancer: false,
+    successGetOffersByFreelancer: false,
+    offers: [],
+    count: 0
+}
+
+export const getOffersByFreelancerAction = createAsyncThunk(
+    "offer job",
+    async () => {
+        const {data} = await axios.get(`${apiUrl}/my/offers`)
+
+        return data
+    }
+)
+
+export const getOffersByFreelancerSlice = createSlice({
+    initialState: initStateGetOffersByFreelancer,
+    name: "offer job",
+    extraReducers: (builder) => {
+        builder.addCase(getOffersByFreelancerAction.pending, (state)=>{
+            state.loadingGetOffersByFreelancer = true
+        })
+        builder.addCase(getOffersByFreelancerAction.fulfilled, (state, data) => {
+            state.loadingGetOffersByFreelancer = false
+            state.successGetOffersByFreelancer = data.payload.success
+            state.offers = data.payload.offers
+            count = data.payload.count
+        })
+        builder.addCase(getOffersByFreelancerAction.rejected, (state, data) => {
+            state.loadingGetOffersByFreelancer = false
+            state.successGetOffersByFreelancer = false
+        })
+    }
+})
+
+// get offer by id
+const initStateGetOffersById = {
+    loadingGetOffersById: false,
+    successGetOffersById: false,
+    offer: {}
+}
+
+export const getOffersByIdAction = createAsyncThunk(
+    "offer job",
+    async (id) => {
+        const {data} = await axios.get(`${apiUrl}/offers/${id}`)
+
+        return data
+    }
+)
+
+export const getOffersByIdSlice = createSlice({
+    initialState: initStateGetOffersById,
+    name: "offer job",
+    extraReducers: (builder) => {
+        builder.addCase(getOffersByIdAction.pending, (state)=>{
+            state.loadingGetOffersById = true
+        })
+        builder.addCase(getOffersByIdAction.fulfilled, (state, data) => {
+            state.loadingGetOffersById = false
+            state.successGetOffersById = data.payload.success
+            state.offer = data.payload.offer
+        })
+        builder.addCase(getOffersByIdAction.rejected, (state, data) => {
+            state.loadingGetOffersById = false
+            state.successGetOffersById = false
+        })
+    }
+})
+
+
+/* // select offer by id
+const initStateEditOffersById = {
+    loadingGetOffersById: false,
+    successGetOffersById: false,
+    offer: {}
+}
+
+export const editOffersByIdAction = createAsyncThunk(
+    "offer job",
+    async (id) => {
+        const {data} = await axios.get(`${apiUrl}/offers/${id}`)
+
+        return data
+    }
+)
+
+export const editOffersByIdSlice = createSlice({
+    initialState: initStateEditOffersById,
+    name: "offer job",
+    extraReducers: (builder) => {
+        builder.addCase(editOffersByIdAction.pending, (state)=>{
+            state.loadingGetOffersById = true
+        })
+        builder.addCase(editOffersByIdAction.fulfilled, (state, data) => {
+            state.loadingGetOffersById = false
+            state.successGetOffersById = data.payload.success
+            state.offer = data.payload.offer
+        })
+        builder.addCase(editOffersByIdAction.rejected, (state, data) => {
+            state.loadingGetOffersById = false
+            state.successGetOffersById = false
+        })
+    }
+}) */
+
+
+// cancel offer job
+const initStateCannelOffer = {
+    loadingCannelOffer: false,
+    successCannelOffer: false,
+    offer: {}
+}
+
+export const cannelOfferAction = createAsyncThunk(
+    "offer job",
+    async (id) => {
+        const {data} = await axios.get(`${apiUrl}/offers/${id}`)
+
+        return data
+    }
+)
+
+export const cannelOfferSlice = createSlice({
+    initialState: initStateCannelOffer,
+    name: "offer job",
+    extraReducers: (builder) => {
+        builder.addCase(cannelOfferAction.pending, (state)=>{
+            state.loadingCannelOffer = true
+        })
+        builder.addCase(cannelOfferAction.fulfilled, (state, data) => {
+            state.loadingCannelOffer = false
+            state.successCannelOffer = data.payload.success
+            state.offer = data.payload.offer
+        })
+        builder.addCase(cannelOfferAction.rejected, (state, data) => {
+            state.loadingCannelOffer = false
+            state.successCannelOffer = false
+        })
+    }
+})
+
+
+// report user
+const initStateReportUser = {
+    loadingReportUser: false,
+    successReportUser: false,
+    job: {}
+}
+
+export const reportUserAction = createAsyncThunk(
+    "offer job",
+    async (id) => {
+        const {data} = await axios.get(`${apiUrl}/jobs/${id}/report`)
+
+        return data
+    }
+)
+
+export const reportUserSlice = createSlice({
+    initialState: initStateReportUser,
+    name: "offer job",
+    extraReducers: (builder) => {
+        builder.addCase(reportUserAction.pending, (state)=>{
+            state.loadingReportUser = true
+        })
+        builder.addCase(reportUserAction.fulfilled, (state, data) => {
+            state.loadingReportUser = false
+            state.successReportUser = data.payload.success
+            state.job = data.payload.job
+        })
+        builder.addCase(reportUserAction.rejected, (state, data) => {
+            state.loadingReportUser = false
+            state.successReportUser = false
+        })
+    }
+})
+
+
+// reducer
+const jobReducer = combineReducers({
+    queryJobs: queryJobsSlice.reducer,
+    getJobById: getJobByIdSlice.reducer,
+    deleteJobById: deleteJobByIdSlice.reducer,
+    getMyJobs: getMyJobsSlice.reducer,
+    getMyJobsByFreelancer: getMyJobsByFreelancerSlice.reducer,
+    createJob: createJobSlice.reducer,
+    offerJob: offerJobSlice.reducer,
+    getOffersByJob: getOffersByJobSlice.reducer,
+    getOffersByFreelancer: getOffersByFreelancerSlice.reducer,
+    getOffersById: getOffersByIdSlice.reducer,
+    cannelOffer: cannelOfferSlice.reducer,
+    reportUser: reportUserSlice.reducer
+})
+
+export default jobReducer
+

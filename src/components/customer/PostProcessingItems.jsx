@@ -7,7 +7,7 @@ import TaskList from "./TaskList";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 
-const ItemsDetailControl = () => {
+const PostProcessingItems = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -121,4 +121,4 @@ const ItemsDetailControl = () => {
     );
 }
 
-export default ItemsDetailControl
+export default PostProcessingItems

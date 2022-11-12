@@ -4,7 +4,9 @@ import Avatar from '../../assets/img/avatar.png';
 import Introduction from "../users/Introduction";
 import Overview from "../users/Overview";
 import Review from "../common/Review";
-import Contact from "../common/Contact";
+import Button from "react-bootstrap/Button";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClose } from '@fortawesome/free-solid-svg-icons'
 const UserDetail = () => {
     const [show, setShow] = useState(false);
 
@@ -13,8 +15,8 @@ const UserDetail = () => {
     return (
         <>
             <div className="userdetail">
-                <div variant="primary" onClick={handleShow}>
-                    <img className='userdetail__content__heading__right--avatar pe-4 pb-4' src={Avatar}></img>
+                <div className="userdetail__heading" variant="primary" onClick={handleShow}>
+                    <img className="userdetail__heading--avatar" src={Avatar}></img>
                     David
                 </div>
 
@@ -27,9 +29,20 @@ const UserDetail = () => {
                     <Modal.Body>
                         <div className='userdetail-block'>
                             <div className='container'>
+                                <div className="close" onClick={handleClose}>
+                                    <FontAwesomeIcon icon={faClose} />
+                                </div>
                                 <div className='d-flex'>
-                                    <div className='col-4 sticky'>
+                                    <div className='col-4 sticky px-3'>
                                         <Introduction></Introduction>
+                                        <div className="d-flex justify-content-between">
+                                            <Button variant="primary" className="btn-contact-post">
+                                                Contact
+                                            </Button>
+                                            <Button variant="primary" className="btn-reject-post">
+                                                Reject
+                                            </Button>
+                                        </div>
                                     </div>
                                     <div className='col-8 px-3'>
                                         <div className='userdetail-block-content'>

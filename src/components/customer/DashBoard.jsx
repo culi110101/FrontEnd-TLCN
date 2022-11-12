@@ -1,6 +1,8 @@
 import React from 'react'
 import Button from "react-bootstrap/Button";
 import ItemsDetailControl from './ItemsDetailControl';
+import CreatePost from './CreatePost';
+import PostProcessingItems from './PostProcessingItems';
 
 
 const DashBoard = () => {
@@ -8,9 +10,7 @@ const DashBoard = () => {
         <div className='dashboard-manage'>
             <div className='d-flex'>
                 <div className='dashboard-manage__control'>
-                    <Button variant="primary" type="submit" className="btn-create-post">
-                        + CREATE A NEW POST
-                    </Button>
+                    <CreatePost></CreatePost>
                 </div>
                 <div className='dashboard-manage__content'>
                     <div className='m-3'>
@@ -80,7 +80,75 @@ const DashBoard = () => {
                             </div>
                         </div>
                     </div>
+                    <div className='mx-3 my-5 py-5'>
+                        <h2>
+                            Posted Jobs Processing (<span>4</span>)
+                        </h2>
+                        <div className='dashboard-manage__content__postlistprocessing'>
+                            <div className='dashboard-manage__content__postlistprocessing__table'>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th scope='col'>Name</th>
+                                            <th scope='col'>Job Type</th>
+                                            <th scope='col'>Start Day</th>
+                                            <th scope='col'>End Day</th>
+                                            <th scope='col'>Control</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope='row'>
+                                                <PostProcessingItems></PostProcessingItems>
+                                            </th>
+                                            <td>Design</td>
+                                            <td>12 July, 2020</td>
+                                            <td>12 July, 2020</td>
+                                            <td>
+                                                <div>
+                                                    <Button variant="primary" className="btn-delete-post">
+                                                        Delete
+                                                    </Button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope='row'>
+                                                <PostProcessingItems></PostProcessingItems>
+                                            </th>
+                                            <td>Design</td>
+                                            <td>12 July, 2020</td>
+                                            <td>12 July, 2020</td>
+                                            <td>
+                                                <div>
+                                                    <Button variant="primary" className="btn-delete-post">
+                                                        Delete
+                                                    </Button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope='row'>
+                                                <PostProcessingItems></PostProcessingItems>
+                                            </th>
+                                            <td>Design</td>
+                                            <td>12 July, 2020</td>
+                                            <td>12 July, 2020</td>
+                                            <td>
+                                                <div>
+                                                    <Button variant="primary" className="btn-delete-post">
+                                                        Delete
+                                                    </Button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                
 
             </div>
         </div>

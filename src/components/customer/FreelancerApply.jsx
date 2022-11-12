@@ -1,7 +1,6 @@
 import React from 'react'
 import Button from "react-bootstrap/Button";
 import UserDetail from './UserDetail';
-import Avatar from '../../assets/img/avatar.png';
 
 const FreelancerApply = () => {
     return (

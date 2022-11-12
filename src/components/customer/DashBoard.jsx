@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from "react-bootstrap/Button";
+import ItemsDetailControl from './ItemsDetailControl';
 
 
 const DashBoard = () => {
@@ -30,8 +31,38 @@ const DashBoard = () => {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th>
-                                                <a href="#">Senior Project Manager</a>
+                                            <th scope='row'>
+                                                <ItemsDetailControl></ItemsDetailControl>
+                                            </th>
+                                            <td>Design</td>
+                                            <td>12 July, 2020</td>
+                                            <td>47</td>
+                                            <td>
+                                                <div>
+                                                    <Button variant="primary" className="btn-delete-post">
+                                                        Delete
+                                                    </Button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope='row'>
+                                                <ItemsDetailControl></ItemsDetailControl>
+                                            </th>
+                                            <td>Design</td>
+                                            <td>12 July, 2020</td>
+                                            <td>47</td>
+                                            <td>
+                                                <div>
+                                                    <Button variant="primary" className="btn-delete-post">
+                                                        Delete
+                                                    </Button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope='row'>
+                                                <ItemsDetailControl></ItemsDetailControl>
                                             </th>
                                             <td>Design</td>
                                             <td>12 July, 2020</td>

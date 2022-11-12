@@ -8,7 +8,7 @@ import { faDesktop } from '@fortawesome/free-solid-svg-icons'
 const Category = () => {
     const dispatch = useDispatch()
 
-    const {categories} = useSelector(state => state.category.getCategoriesIntro)
+    const { categories } = useSelector(state => state.category.getCategoriesIntro)
 
     useEffect(() => {
         dispatch(getCategoriesIntroAction(4))
@@ -22,58 +22,20 @@ const Category = () => {
                     <p>Leverage agile frameworks to provide a robust synopsis for high level overviews to start.</p>
                 </div>
                 <ul className='category__list row'>
-{(categories && categories.length != 0) && categories.map((item, index) => (
+                    {categories && categories.map((item, index) => (
                         <li key={index} className='col-3 category__list__items'>
                             <a href='#'>
                                 <div>
                                     <div className='category__list__items--icon'>
-                                        <i>icon</i>
+                                        <FontAwesomeIcon icon={faDesktop} />
                                     </div>
                                     <p className='category__list__items--header'>{item.category.name}</p>
                                     <p className='category__list__items--decription'> <span className='category__list__items--sum-job'>{item.numJobs}</span> Vacancy </p>
-                                                        <li className='col-3 category__list__items'>
-                        <a href='#'>
-                            <div>
-                                <div className='category__list__items--icon'>
-                                <FontAwesomeIcon icon={faDesktop} />
-                                </div>
-                                <p className='category__list__items--header'>Development</p>
-                                <p className='category__list__items--decription'> <span className='category__list__items--sum-job'>415</span> Vacancy </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li className='col-3 category__list__items'>
-                        <a href='#'>
-                            <div>
-                                <div className='category__list__items--icon'>
-                                <FontAwesomeIcon icon={faDesktop} />
-                                </div>
-                                <p className='category__list__items--header'>Development</p>
-                                <p className='category__list__items--decription'> <span className='category__list__items--sum-job'>415</span> Vacancy </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li className='col-3 category__list__items'>
-                        <a href='#'>
-                            <div>
-                                <div className='category__list__items--icon'>
-                                    <FontAwesomeIcon icon={faDesktop} />
-                                </div>
-                                <p className='category__list__items--header'>Development</p>
-                                <p className='category__list__items--decription'> <span className='category__list__items--sum-job'>415</span> Vacancy </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li className='col-3 category__list__items'>
-                        <a href='#'>
-                            <div>
-                                <div className='category__list__items--icon'>
-                                    <FontAwesomeIcon icon={faDesktop} />
                                 </div>
                             </a>
                         </li>
                     ))}
-                    
+
                 </ul>
                 <div className='d-flex justify-content-center'>
                     <a href="#" className='category--explore'>

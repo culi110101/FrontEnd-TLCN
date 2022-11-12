@@ -15,8 +15,8 @@ function App() {
         <Route path='/search' element={<SearchList></SearchList>}/>
         <Route path='/items' element={<JobItemsLayer></JobItemsLayer>}/>
         <Route path='/profile' element={<ProfileUser></ProfileUser>}/>
-<Route path='/manageforcustomer' element={<ManageForCustomer></ManageForCustomer>}/>
-<Route path='*' element={<Auth></Auth>}/>
+        <Route path='/manageforcustomer' element={<ManageForCustomer></ManageForCustomer>}/>
+        <Route path='*' element={<Auth></Auth>}/>
       </Routes>
     </BrowserRouter>
   );

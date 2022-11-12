@@ -15,6 +15,7 @@ export const store = configureStore({
         job: jobReducer,
         credit: creditReducer,
         category: categoryReducer,
+        user: userReducer,
         /* user: userReducer,
         transaction: transactionReducer,
         task: taskReducer,

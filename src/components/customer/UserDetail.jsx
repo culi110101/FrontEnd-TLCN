@@ -5,6 +5,9 @@ import Introduction from "../users/Introduction";
 import Overview from "../users/Overview";
 import Review from "../common/Review";
 import Contact from "../common/Contact";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getProfileAction } from "../../store/entities/user";
 const UserDetail = () => {
     const [show, setShow] = useState(false);
 

@@ -1,7 +1,7 @@
 import { createSlice, combineReducers, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios'
 import { apiUrl } from "../../common/consts";
-
+import Cookies from 'js-cookie';
 
 // get profile
 const initStateGetProfile = {
@@ -13,8 +13,9 @@ const initStateGetProfile = {
 export const getProfileAction = createAsyncThunk(
     "profile",
     async () => {
-        const {data} = await axios.get(`${apiUrl}/profile`)
-
+        console.log("OK")
+        
+        const {data} = await axios.get(`${apiUrl}/profile`, {withCredentials: true})
         return data
     }
 )

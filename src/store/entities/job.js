@@ -7,14 +7,17 @@ import { apiUrl } from "../../common/consts";
 const initStateQueryJobs = {
     loadingQueryJobs: false,
     successQueryJobs: false,
-    result: []
+    results: [],
+    categories: [],
+    totalPages: 0
 }
 
 export const queryJobsAction = createAsyncThunk(
     "query jobs",
     async (dataQuery) => {
-        const {data} = await axios.get(`${apiUrl}/jobs?name=${dataQuery.name}&status=${dataQuery.status}&sortBy=${dataQuery.sortBy}&limit=${dataQuery.limit}&page=${dataQuery.page}&exclude=${dataQuery.exclude}`)
-
+        /* const {data} = await axios.get(`${apiUrl}/jobs/search?name=${dataQuery.name}&status=${dataQuery.status}&sortBy=${dataQuery.sortBy}&limit=${dataQuery.limit}&page=${dataQuery.page}&exclude=${dataQuery.exclude}`) */
+        const {data} = await axios.get(`${apiUrl}/jobs/search?&status=${dataQuery.status}&limit=${dataQuery.limit}&page=${dataQuery.page}`)
+        console.log(data)
         return data
     }
 )
@@ -29,7 +32,10 @@ export const queryJobsSlice = createSlice({
         builder.addCase(queryJobsAction.fulfilled, (state, data) => {
             state.loadingQueryJobs = false
             state.successQueryJobs = data.payload.success
-            state.result = data.payload.result
+            state.results = data.payload.results
+            state.categories = data.payload.categories
+            state.totalPages = data.payload.totalPages
+            state.totalResults = data.payload.totalResults
         })
         builder.addCase(queryJobsAction.rejected, (state, data) => {
             state.loadingQueryJobs = false
@@ -43,7 +49,8 @@ export const queryJobsSlice = createSlice({
 const initStateGetJobById = {
     loadingGetJobById: false,
     successGetJobById: false,
-    job: {}
+    job: {},
+    user: {}
 }
 
 export const getJobByIdAction = createAsyncThunk(
@@ -66,6 +73,7 @@ export const getJobByIdSlice = createSlice({
             state.loadingGetJobById = false
             state.successGetJobById = data.payload.success
             state.job = data.payload.job
+            state.user = data.payload.user
         })
         builder.addCase(getJobByIdAction.rejected, (state, data) => {
             state.loadingGetJobById = false

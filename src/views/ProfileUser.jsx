@@ -6,18 +6,28 @@ import Overview from '../components/users/Overview'
 import UpdateInformation from '../components/users/UpdateInformation'
 import Review from '../components/common/Review'
 import Contact from '../components/common/Contact'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProfileAction } from '../store/entities/user'
+import { useEffect } from 'react'
 
 
 
 
 const ProfileUser = () => {
+    const dispatch = useDispatch()
+
+    const {user} = useSelector(state => state.user.getProfile)
+
+    useEffect(() => {
+        dispatch(getProfileAction())
+    }, [])
     let body = (
         <div className='body'>
             <div className='profileuser'>
                 <div className='container'>
                     <div className='d-flex'>
                         <div className='col-4 sticky'>
-                            <Introduction></Introduction>
+                            {user && <Introduction user={user}></Introduction>}
                             <UpdateInformation></UpdateInformation>
                         </div>
                         <div className='col-8 px-3'>
@@ -25,7 +35,7 @@ const ProfileUser = () => {
                                 <Overview></Overview>
                                 <div className='profileuser-content__contact'>
                                     <p className='profileuser-content__contact--heading'>Leave me your info</p>
-                                    <Contact></Contact>
+                                    {user && (<Contact user={user}></Contact>)}
                                 </div>
                             </div>
                                 <div className='profileuser-content__review'>

@@ -1,7 +1,28 @@
 import React from 'react'
 import JobItems from './JobItems'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getNewestJobsAction } from '../../store/entities/job'
 
 const FeaturedJobs = () => {
+
+  const dispatch = useDispatch()
+
+  /* const {newestJobs, newestJobsCategories} = useSelector(state => state.job.getNewestJobs)
+
+  useEffect(() => {
+    dispatch(getNewestJobsAction({num: 3,status: "Open"}))
+  }, []) */
+  
+  const {jobs, categories} = useSelector(state => state.job.getNewestJobs)
+  
+
+  useEffect(() => {
+    dispatch(getNewestJobsAction({num: 3,status: "Open"}))
+  }, [])
+
+
+
   return (
     <div className='container featuredjobs'>
       <div className='d-flex justify-content-center'>
@@ -11,15 +32,17 @@ const FeaturedJobs = () => {
       </div>
       </div>
       <ul>
-          <li className='d-flex justify-content-center'>
+          {jobs && jobs.map((item, index) => (
+            <li key={index} className='d-flex justify-content-center'>
+              <JobItems job={item} category={categories[index]}></JobItems>
+            </li>
+          ))}
+          {/* <li className='d-flex justify-content-center'>
             <JobItems></JobItems>
           </li>
           <li className='d-flex justify-content-center'>
             <JobItems></JobItems>
-          </li>
-          <li className='d-flex justify-content-center'>
-            <JobItems></JobItems>
-          </li>
+          </li> */}
       </ul>
     </div>
   )

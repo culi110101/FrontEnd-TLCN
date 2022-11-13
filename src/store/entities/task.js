@@ -14,9 +14,20 @@ const initStateCreateTask = {
 export const createTaskAction = createAsyncThunk(
     'create task',
     async (taskData) => {
-        const {data} = await axios.post(`${apiUrl}/tasks/create`, taskData)
-
-        return data
+        try{
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('job')}`
+                }
+            }
+            const {data} = await axios.post(`${apiUrl}/tasks/create`, taskData, config)
+            console.log(data)
+            return data
+        }
+        catch(error){
+            console.log(error)
+            return error.response.data
+        }
     }
 )
 
@@ -47,7 +58,7 @@ export const getTasksByJobAction = createAsyncThunk(
     'get tasks',
     async (jobId) => {
         const {data} = await axios.get(`${apiUrl}/jobs/${jobId}/tasks`)
-
+        console.log(data)
         return data
     }
 )

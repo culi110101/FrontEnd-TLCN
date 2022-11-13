@@ -64,6 +64,12 @@ const Login = () => {
         dispatch(getIntroAction())
     }, [])
 
+    useEffect(() => {
+        if (successLogin){
+            window.location.reload()
+        }
+    }, [successLogin])
+
 
     return (
         <>

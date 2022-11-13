@@ -1,6 +1,18 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getTasksByJobAction } from '../../store/entities/task'
 
-const DecriptionJob = () => {
+const DecriptionJob = ({job}) => {
+    const dispatch = useDispatch()
+
+    const { tasks } = useSelector(state => state.task.getTasksByJob)
+
+    useEffect(() => {
+        if (job) {
+            dispatch(getTasksByJobAction(job.id))
+        }
+    }, [job])
     return (
         <div className='decriptionjob'>
             <div className=''>
@@ -15,16 +27,10 @@ const DecriptionJob = () => {
                 <div className='decriptionjob__tasklist mb-5'>
                     <h4 className='decriptionjob__tasklist--heading mb-4'>What you will be doing:</h4>
                     <ul className="decriptionjob__tasklist__items">
-                        <li className="decriptionjob__tasklist__items--detail"> tên task 1àhjsahf sahfksa ldhfjkf skjsss sssss sssss sssss ssss ssss ssss sss</li>
-                        <li className="decriptionjob__tasklist__items--detail"> tên task2</li>
-                        <li className="decriptionjob__tasklist__items--detail"> tên task3</li>
-                        <li className="decriptionjob__tasklist__items--detail"> tên task4</li>
-                        <li className="decriptionjob__tasklist__items--detail"> tên task5</li>
-                        <li className="decriptionjob__tasklist__items--detail"> tên task6</li>
-                        <li className="decriptionjob__tasklist__items--detail"> tên task7</li>
-                        <li className="decriptionjob__tasklist__items--detail"> tên task8</li>
-                        <li className="decriptionjob__tasklist__items--detail"> tên task9</li>
-                        <li className="decriptionjob__tasklist__items--detail"> tên task10</li>
+                        
+                        {(tasks && tasks.length != 0) ? tasks.map((task, index) => (
+                            <li className="decriptionjob__tasklist__items--detail">{task.name}</li>
+                        )): <p>Add Your Task</p>}
                     </ul>
                 </div>
             </div>

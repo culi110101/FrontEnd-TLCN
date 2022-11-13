@@ -298,10 +298,21 @@ const initStateOfferJob = {
 
 export const offerJobAction = createAsyncThunk(
     "offer job",
-    async (offerData, id) => {
-        const {data} = await axios.post(`${apiUrl}/jobs/${id}/offer`, offerData)
-
-        return data
+    async ({offerData, id}) => {
+        try{
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('job')}`
+                }
+            }
+            const {data} = await axios.post(`${apiUrl}/jobs/${id}/offer`, offerData, config)
+    
+            return data
+        }
+        catch(error){
+            console.log(error)
+            return error.response.data
+        }
     }
 )
 
@@ -335,8 +346,8 @@ const initStateGetOffersByJob = {
 
 export const getOffersByJobAction = createAsyncThunk(
     "get offer by job",
-    async (offerData, id) => {
-        const {data} = await axios.post(`${apiUrl}/jobs/${id}/offers`, offerData)
+    async (id) => {
+        const {data} = await axios.get(`${apiUrl}/jobs/${id}/offers`)
 
         return data
     }

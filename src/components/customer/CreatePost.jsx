@@ -5,13 +5,16 @@ import {useDispatch, useSelector } from 'react-redux'
 import { useEffect } from "react";
 import { getAllCategoriesAction } from "../../store/entities/category";
 import { createJobAction } from "../../store/entities/job";
-
+import { getMyJobsAction } from "../../store/entities/job";
+import swal from 'sweetalert';
 
 const CreatePost = () => {
     const [show, setShow] = useState(false);
 
     const dispatch = useDispatch()
     const {categories } = useSelector(state => state.category.getAllCategories)
+
+    const {successCreateJob} = useSelector(state => state.job.createJob)
 
     useEffect(() => {
         dispatch(getAllCategoriesAction())
@@ -38,6 +41,19 @@ const CreatePost = () => {
         console.log(jobData)
         dispatch(createJobAction(jobData))
     }
+
+    useEffect(() => {
+        if (successCreateJob){
+            swal({
+                title: "Create Job",
+                text: "Create Job Successfully",
+                icon: "success",
+                dangerMode: false,
+              })
+            dispatch(getMyJobsAction({ limit: 3, page: 1 }))
+            
+        }
+    }, [successCreateJob])
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);

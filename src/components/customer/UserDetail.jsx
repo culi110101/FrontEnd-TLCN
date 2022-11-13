@@ -7,7 +7,7 @@ import Review from "../common/Review";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
-const UserDetail = () => {
+const UserDetail = ({freelancer}) => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -17,7 +17,7 @@ const UserDetail = () => {
             <div className="userdetail">
                 <div className="userdetail__heading" variant="primary" onClick={handleShow}>
                     <img className="userdetail__heading--avatar" src={Avatar}></img>
-                    David
+                    {freelancer && (freelancer.name)}
                 </div>
 
                 <Modal

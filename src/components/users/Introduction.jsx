@@ -4,6 +4,7 @@ import Avatar from '../../assets/img/avatar.png'
 const Introduction = ({ user }) => {
     return (
         <div>
+            
             {user && (
                 <div className='profileuser__information'>
                     <div className='profileuser__information__heading'>

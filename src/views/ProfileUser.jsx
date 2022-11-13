@@ -28,7 +28,7 @@ const ProfileUser = () => {
                     <div className='d-flex'>
                         <div className='col-4 sticky'>
                             {user && <Introduction user={user}></Introduction>}
-                            <UpdateInformation></UpdateInformation>
+                            {user && <UpdateInformation user={user}></UpdateInformation>}
                         </div>
                         <div className='col-8 px-3'>
                             <div className='profileuser-content'>

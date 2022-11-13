@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Avatar from '../../assets/img/avatar.png';
@@ -11,6 +11,10 @@ import { handleDate } from "../../common/lib";
 
 const ItemsDetailControl = ({ job }) => {
     const [show, setShow] = useState(false);
+
+    
+
+
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -113,9 +117,9 @@ const ItemsDetailControl = ({ job }) => {
                                             </div>
                                             <TaskList></TaskList>
                                             <FreelancerApply></FreelancerApply> */}
-                                        <DecriptionJob></DecriptionJob>
-                                        <TaskList></TaskList>
-                                        <FreelancerApply></FreelancerApply>
+                                        {job && <DecriptionJob job={job}></DecriptionJob>}
+                                        {job && <TaskList job={job}></TaskList>}
+                                        {job && <FreelancerApply job={job}></FreelancerApply>}
                                         </div>
                                     </div>
                                 </div>

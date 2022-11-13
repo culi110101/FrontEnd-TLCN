@@ -44,6 +44,45 @@ export const getProfileSlice = createSlice({
     }
 })
 
+// edit profile
+const initStateEditProfile = {
+    loadingEditProfile: false,
+    success: false
+}
+
+export const editProfileAction = createAsyncThunk(
+    "edit profile",
+    async (profileData) => {
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem('job')}`
+            }
+        }
+        
+        const {data} = await axios.put(`${apiUrl}/profile`, profileData, config)
+        console.log(data)
+        return data
+    }
+)
+
+export const editProfileSlice = createSlice({
+    initialState: initStateEditProfile,
+    name: 'edit profile',
+    extraReducers: (builder) => {
+        builder.addCase(editProfileAction.pending, (state) => {
+            state.loadingEditProfile = true
+        })
+        builder.addCase(editProfileAction.fulfilled, (state, data) => {
+            state.loadingEditProfile = false
+            state.success = data.payload.success
+        })
+        builder.addCase(editProfileAction.rejected, (state) => {
+            state.loadingEditProfile = false
+            state.success = false
+        })
+    }
+})
+
 
 // change password
 const initStateChangePassword = {
@@ -70,7 +109,7 @@ export const changePasswordSlice = createSlice({
         })
         builder.addCase(changePasswordAction.fulfilled, (state, data) => {
             state.loadingChangePassword = false
-            state.messageChangePassword = data.payload.messageChangePassword
+            state.messageChangePassword = data.payload.message
             state.successChangePassword = data.payload.success
         })
         builder.addCase(changePasswordAction.rejected, (state) => {

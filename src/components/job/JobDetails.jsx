@@ -6,17 +6,21 @@ import { useSearchParams } from 'react-router-dom'
 import { useEffect } from 'react';
 import { handleDate } from '../../common/lib';
 import Offer from '../common/Offer';
+import { getTasksByJobAction } from '../../store/entities/task';
+
 const JobDetails = () => {
     const dispatch = useDispatch()
 
     let [searchParams, setSearchParams] = useSearchParams();
 
     const { job, user } = useSelector(state => state.job.getJobById)
+    const {tasks} = useSelector(state => state.task.getTasksByJob)
 
     useEffect(() => {
         const id = searchParams.get('id')
         if (id) {
             dispatch(getJobByIdAction(id))
+            dispatch(getTasksByJobAction(id))
         }
     }, [])
 
@@ -53,7 +57,7 @@ const JobDetails = () => {
                                         </div>
                                     </div>
                                     <div className='d-flex justify-content-between'>
-                                        <Offer></Offer>
+                                        {job && <Offer job={job}></Offer>}
                                         <div className='d-flex'>
                                             <div className='d-flex jobdetail__price'>
                                                 {/* icon đô la */}
@@ -89,10 +93,9 @@ const JobDetails = () => {
                                         <div className='jobdetail__content__body__tast mb-5'>
                                             <ul>
                                                 <h4 className=' mb-4'>What you will be doing:</h4>
-                                                <li>Contribute new controls or design improvements to our</li>
-                                                <li>Contribute new controls or design improvements to our</li>
-                                                <li>Contribute new controls or design improvements to our</li>
-                                                <li>Contribute new controls or design improvements to our</li>
+                                                {tasks && tasks.map((task, index) => (
+                                                    <li key={index}>{task.name}</li>
+                                                ))}
                                             </ul>
                                         </div>
                                     </div>

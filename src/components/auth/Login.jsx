@@ -10,6 +10,10 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { ReactComponent as Logo } from '../../assets/img/logo.svg';
 import swal from 'sweetalert';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+
 // logic
 import { checkEmailFormat, checkLengthPassword } from "../../common/validation";
 
@@ -17,8 +21,8 @@ import { checkEmailFormat, checkLengthPassword } from "../../common/validation";
 const Login = () => {
     const dispatch = useDispatch();
 
-    const {successLogin, messageLogin, isLoadingLogin} = useSelector(state => state.auth.login)
-    const {numJobs, numCompanies} = useSelector(state => state.job.getIntro)
+    const { successLogin, messageLogin, isLoadingLogin } = useSelector(state => state.auth.login)
+    const { numJobs, numCompanies } = useSelector(state => state.job.getIntro)
 
     const [loginData, setData] = useState({
         email: "",
@@ -26,30 +30,49 @@ const Login = () => {
     });
 
 
-    const getInfo = (event) => {
+    const getEmail = (event) => {
         setData({
             ...loginData,
             [event.target.name]: event.target.value,
         });
     };
+    const getPassword = (event) => {
+        if (event.target.value) {
+            document.getElementsByClassName("eyeopen")[0].classList.add("visible");
+        }
+        setData({
+            ...loginData,
+            [event.target.name]: event.target.value,
+        });
+    };
+    const visiblePassword = () => {
+        document.getElementById("password").type = "text";
+        document.getElementsByClassName("eyeopen")[0].classList.remove("visible");
+        document.getElementsByClassName("eyeclose")[0].classList.add("visible");
+    }
+    const invisiblePassword = () => {
+        document.getElementById("password").type = "password";
+        document.getElementsByClassName("eyeclose")[0].classList.remove("visible");
+        document.getElementsByClassName("eyeopen")[0].classList.add("visible");
+    }
 
     const submitLogin = () => {
-        if (!checkEmailFormat(loginData.email)){
+        if (!checkEmailFormat(loginData.email)) {
             swal({
                 title: "Error",
                 text: "Invalid Email Format",
                 icon: "error",
                 dangerMode: true,
-              })
+            })
             return
         }
-        if (!checkLengthPassword(loginData.password)){
+        if (!checkLengthPassword(loginData.password)) {
             swal({
                 title: "Error",
                 text: "Password must be at least 6 characters",
                 icon: "error",
                 dangerMode: true,
-              })
+            })
             return
         }
         dispatch(loginAction(loginData));
@@ -65,7 +88,7 @@ const Login = () => {
     }, [])
 
     useEffect(() => {
-        if (successLogin){
+        if (successLogin) {
             window.location.reload()
         }
     }, [successLogin])
@@ -112,7 +135,7 @@ const Login = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-7 p-3 right-content-for-login">
+                            <div className="col-12 col-md-7 py-3 right-content-for-login">
                                 <Logo />
                                 {/* 
                                     // messageLogin: Lỗi hiện ra khi login thất bại
@@ -120,38 +143,49 @@ const Login = () => {
                                 */}
                                 <div className="right-content-for-login__common">
                                     <div className="right-content-for-login__common__content">
-                                        <div className="mb-3">
+                                        <div className="mb-3 px-3">
                                             <label className="form-label">E-mail</label>
-                                            <input name='email' onChange={getInfo} className="form-input" type="email" placeholder="example@gmail.com" />
+                                            <input name='email' onChange={getEmail} className="form-input" type="email" placeholder="example@gmail.com" />
                                             {/* 
                                                 // validateMessage.messageEmail lỗi sai format của email
                                                 {validateMessage.messageEmail != "" && (<p>{validateMessage.messageEmail}</p>)} 
                                             */}
+                                            {messageLogin && <p className="text-danger">{messageLogin}</p>}
                                             <p className="text-muted">
                                                 We'll never share your email with anyone else.
                                             </p>
                                         </div>
 
-                                        <div className="mb-3">
+                                        <div className="mb-3 px-3">
                                             <label className="form-label">Password</label>
-                                            <input name='password' onChange={getInfo} className="form-input" type="password" placeholder="Enter password" />
+                                            <div className="position-relative">
+                                                <input name='password' onChange={getPassword} id = "password" className="form-input" type="password" placeholder="Enter password" />
+                                                <span className="visible-password">
+                                                    <span className="eyeopen" onClick={visiblePassword}>
+                                                        <FontAwesomeIcon icon={faEye} />
+                                                    </span>
+                                                    <span className="eyeclose"  onClick={invisiblePassword}>
+                                                        <FontAwesomeIcon icon={faEyeSlash} />
+                                                    </span>
+                                                </span>
+                                            </div>
                                             {/* 
                                                 // validateMessage.messagePassword lỗi sai khi password ít hơn 6 ký tự
                                                 {validateMessage.messagePassword != "" && (<p>{validateMessage.messagePassword}</p>)} 
                                             */}
                                         </div>
-                                        <div className="mb-3">
-                                            <Form.Check type="checkbox" label="Check me out" />
+                                        <div className="mb-3 px-3">
+                                            <a href="#">For got password?</a>
                                         </div>
                                     </div>
                                     <div className="d-flex">
                                         <div className="col-6 px-2">
-                                            <Button onClick={submitLogin} variant="primary" type="submit" className="btn-go-to-home">
+                                            <Button onClick={submitLogin} variant="primary" className="btn-go-to-home">
                                                 Login
                                             </Button>
                                         </div>
                                         <div className="col-6 px-2" onClick={handleClose}>
-                                            <Button variant="primary" type="submit" className="btn-go-to-home">
+                                            <Button variant="primary" type="submit" className="btn-close-login">
                                                 Close
                                             </Button>
                                         </div>

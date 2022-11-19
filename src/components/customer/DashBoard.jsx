@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import ItemsDetailControl from './ItemsDetailControl';
 import CreatePost from './CreatePost';
 import PostProcessingItems from './PostProcessingItems';
-import ManagePostForFreelancer from '../auth/freelancer/ManagePostForFreelancer';
+import ManagePostForFreelancer from '../freelancer/ManagePostForFreelancer';
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { getMyJobsAction, getMyJobsProcessingAction } from '../../store/entities/job';
@@ -126,7 +126,6 @@ const DashBoard = () => {
                             </div>
                         </div>
                     </div>
-                    <ManagePostForFreelancer></ManagePostForFreelancer>
                 </div>
 
 

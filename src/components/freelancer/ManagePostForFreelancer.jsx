@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from "react-bootstrap/Button";
-import PostProcessingItems from '../../customer/PostProcessingItems';
+import PostProcessingItems from './../customer/PostProcessingItems';
 
 
 const ManagePostForFreelancer = () => {

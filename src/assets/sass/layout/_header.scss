@@ -4,7 +4,9 @@ header {
     right: 0;
     width: 100%;
     z-index: 999;
-    background-color: none;
+    transition: 0.3s ease;
+    background-color: white;
+    border-bottom: 2px solid #00b074;
     svg{
         margin-left: 3rem;
         height: 60px;
@@ -28,6 +30,7 @@ header {
                         display: flex;
                         align-items: center;
                         margin: 0px 20px;
+                        text-transform: uppercase;
 
                         @include max-width-1200 () {
                             margin: 0px 12px;

@@ -1,19 +1,14 @@
 .modal-body {
     padding: 0;
-    width: 100%;
-    height: 100%;
 }
 
 .modal-dialog {
     display: grid;
     place-items: center;
-    max-width: fit-content;
     height: 100%;
 }
 
 .modal-content {
-    width: fit-content;
-    height: fit-content;
     border-radius: 16px;
 }
 
@@ -22,6 +17,9 @@
     padding-top: 30px;
     border-top-left-radius: 13px;
     border-bottom-left-radius: 13px;
+    @include max-width-768{
+        display: none;
+    }
 
     &__introduction {
         &>p:first-child {
@@ -59,14 +57,16 @@
     }
 }
 
-.right-content-for-register {
+.right-content-for-login {
     display: grid;
     place-items: center;
-    height: 650px;
-
-    svg {
-        width: 150px;
-        height: auto;
+    height: auto;
+    svg{
+        user-select: none;
+        margin-bottom: 1rem;
+        @include max-width-768{
+            width: 80%;
+        }
     }
 
     &__common {
@@ -101,6 +101,20 @@
                 outline: none;
             }
         }
+        .visible-password{
+            position: absolute;
+            top:calc(1rem - 3px);
+            right: 1rem;
+            .eyeopen{
+                display: none;
+            }
+            .eyeclose{
+                display: none;
+            }
+            .visible{
+                display: inline-block !important;
+            }
+        }
     }
 }
 
@@ -111,24 +125,43 @@
     color: #2b3940
 }
 
-.btn-go-to-home {
+.btn-go-to-home,.btn-findjob {
     width: 100%;
     min-width: 160px;
     height: 48px;
     line-height: 36px;
     color: #fff;
     background-color: #00b074;
-    border-color: #00b074;
+    border: solid 2px#00b074 !important;;
 }
 
-.btn-go-to-home:hover {
+.btn-go-to-home:hover,.btn-findjob:hover {
     color: #00b074 !important;
     background-color: white !important;
-    border-color: #00b074 !important;
-    border: solid 2px;
+}
+.btn-close-login, .btn-findFreelancer{
+    width: 100%;
+    min-width: 160px;
+    height: 48px;
+    line-height: 36px;
+    color: white;
+    background-color: #c23737;
+    border: solid 2px #c23737!important;
+}
+.btn-close-login:hover,.btn-findFreelancer:hover {
+    color: #c23737 !important;
+    background-color: white !important;
 }
 
 .login-btn {
-    @include createButton(12px, 24px, white, #00b074, #00b074);
+    @include createButton(12px, 24px, #2b3940, transparent, transparent);
     text-transform: uppercase;
+
+    &:hover{
+        width: 99.56px;
+        height: 50px;
+        background-color: transparent !important;
+        border: none !important;
+        color: #2b3940 !important;
+    }
 }

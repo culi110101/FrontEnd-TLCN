@@ -3,6 +3,9 @@
     background-color: #fff;
     padding: 20px 20px;
     border-radius: 0.5rem!important;
+    @include max-width-768{
+        padding: 8px 8px;
+    }
 
     &__input {
         width: calc(100% - 160px);
@@ -22,6 +25,12 @@
             &:focus-visible{
                 outline: none
             }
+            @include max-width-768{
+                padding: 0.5rem !important;
+            }
+        }
+        @include max-width-768{
+            width: calc(100% - 90px);
         }
     }
 
@@ -30,6 +39,10 @@
         border: none;
         width: 160px;
         font-size: 1.25rem;
+        @include max-width-768{
+            padding: 0.5rem !important;
+            width: 90px;
+        }
     }
 }
 

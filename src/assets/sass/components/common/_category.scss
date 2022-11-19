@@ -1,9 +1,11 @@
-.content{
+.content {
     background-color: white;
 }
+
 .category {
     padding-top: 6.5rem;
     padding-bottom: 6.5rem;
+
     &__header {
         margin-bottom: 4.375rem;
         display: grid;
@@ -50,6 +52,13 @@
                     padding: 32px 6px 12px 6px;
 
                 }
+
+                &:hover {
+                    p{
+                        color: #00b074 !important;
+                    }
+                    border-color: #00b074;
+                }
             }
 
             &--icon {
@@ -65,7 +74,6 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color: #f71e3f !important;
             }
 
             &--header {
@@ -75,6 +83,7 @@
                 font-weight: 600;
                 color: #2b3940 !important;
                 margin-bottom: 0.5rem;
+                @include webkit-box(1)
             }
 
             &--decription {
@@ -86,6 +95,7 @@
                 margin-top: 0;
                 margin-bottom: 1rem;
             }
+
         }
     }
 
@@ -94,5 +104,10 @@
         text-transform: uppercase;
         @include createButton(12px, 32px, #2b3940, none, #2b3940);
         border: 1px solid;
+
+        &:hover {
+            color: #00b074;
+            border-color: #00b074;
+        }
     }
 }

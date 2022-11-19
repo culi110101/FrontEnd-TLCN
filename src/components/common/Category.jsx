@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getCategoriesIntroAction } from '../../store/entities/category'
 import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDesktop } from '@fortawesome/free-solid-svg-icons'
+import { faDesktop, faPenNib, faMicrochip,faKeyboard } from '@fortawesome/free-solid-svg-icons'
+
 
 const Category = () => {
     const dispatch = useDispatch()
@@ -13,6 +14,27 @@ const Category = () => {
     useEffect(() => {
         dispatch(getCategoriesIntroAction(4))
     }, [])
+    const items =[{
+        icon:faDesktop,
+        color:"#4743db",
+        backgroundColor:"rgba(71,67,219,.1)"
+    },
+    {
+        icon:faPenNib,
+        color:"#65efe3",
+        backgroundColor:"rgba(101,239,227,.1)"
+    },
+    {
+        icon:faMicrochip,
+        color:"#fa8557",
+        backgroundColor:"rgba(250,133,87,.1)"
+    },
+    {
+        icon:faKeyboard,
+        color:"#f71e3f",
+        backgroundColor:"rgba(247,30,63,.1)"
+    }
+]
 
     return (
         <div className='content'>
@@ -23,11 +45,11 @@ const Category = () => {
                 </div>
                 <ul className='category__list row'>
                     {categories && categories.map((item, index) => (
-                        <li key={index} className='col-3 category__list__items'>
+                        <li key={index} className='col-6 col-md-3 mb-3 category__list__items grow'>
                             <a href='#'>
                                 <div>
-                                    <div className='category__list__items--icon'>
-                                        <FontAwesomeIcon icon={faDesktop} />
+                                    <div className='category__list__items--icon' style={{color: items[index].color,backgroundColor:items[index].backgroundColor}}>
+                                        <FontAwesomeIcon icon={items[index].icon} />
                                     </div>
                                     <p className='category__list__items--header'>{item.category.name}</p>
                                     <p className='category__list__items--decription'> <span className='category__list__items--sum-job'>{item.numJobs}</span> Vacancy </p>
@@ -37,7 +59,7 @@ const Category = () => {
                     ))}
 
                 </ul>
-                <div className='d-flex justify-content-center'>
+                <div className='d-flex justify-content-center pulse-grow'>
                     <a href="#" className='category--explore'>
                         Explore All
                     </a>

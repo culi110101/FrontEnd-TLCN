@@ -25,12 +25,12 @@ const ProfileUser = () => {
         <div className='body'>
             <div className='profileuser'>
                 <div className='container'>
-                    <div className='d-flex'>
-                        <div className='col-4 sticky'>
+                    <div className='d-block d-md-flex'>
+                        <div className='col-12 col-md-4 sticky'>
                             {user && <Introduction user={user}></Introduction>}
                             {user && <UpdateInformation user={user}></UpdateInformation>}
                         </div>
-                        <div className='col-8 px-3'>
+                        <div className='col-12 col-md-8 px-md-3'>
                             <div className='profileuser-content'>
                                 <Overview></Overview>
                                 <div className='profileuser-content__contact'>

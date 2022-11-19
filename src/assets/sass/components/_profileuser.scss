@@ -6,6 +6,11 @@
         top: 20px;
         margin-bottom: 16px;
         height: fit-content;
+        @include max-width-768{
+            position: relative;
+            top: 0;
+            margin-bottom: 2rem;
+        }
     }
     .profileuser-content{
         padding: 30px;

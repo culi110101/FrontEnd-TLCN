@@ -5,7 +5,7 @@ const Review = () => {
     return (
         <div className='review'>
             <div className='w-100 review__content'>
-                <div className='review__content__heading d-flex justify-content-between'>
+                <div className='review__content__heading d-md-flex justify-content-between'>
                     <div className='d-flex'>
                         <img className='review__content__heading--avatar' src={Avatar}></img>
                         <div >
@@ -17,7 +17,7 @@ const Review = () => {
                     </div>
                     <div>
                         {/* ngày đăng */}
-                        <p className='review__content__heading--date'>
+                        <p className='review__content__heading--date text-center'>
                             19 June 2020
                         </p>
                     </div>

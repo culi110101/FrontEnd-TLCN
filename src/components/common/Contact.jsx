@@ -10,8 +10,8 @@ const Contact = ({ user }) => {
                             <label htmlFor="name">Your Name</label>
                             <input value={user.name} type="text" />
                         </div>
-                        <div className='d-flex'>
-                            <div className='col-12 col-md-6 pe-3'>
+                        <div className='d-block d-md-flex'>
+                            <div className='col-12 col-md-6 pe-md-3'>
                                 <label htmlFor="name">E-mail</label>
                                 <input value={user.email} type="email" />
                             </div>
